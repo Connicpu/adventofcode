@@ -1,5 +1,7 @@
 use std::fs;
 use std::io::{BufRead, BufReader};
+use std::collections::HashMap;
+use std::collections::hash_map::Entry;
 
 pub fn puzzle_1() {
     let file = fs::File::open("./input/day5.txt").unwrap();
@@ -34,6 +36,46 @@ pub fn puzzle_1() {
         if !mean_pairs && dubs {
             nice_strings += 1;
         }
+    }
+    
+    println!("Nice strings: {}", nice_strings);
+}
+
+pub fn puzzle_2() {
+    let file = fs::File::open("./input/day5.txt").unwrap();
+    let reader = BufReader::new(file);
+    
+    let mut nice_strings = 0;
+    for line in reader.lines() {
+        let line = line.unwrap();
+        
+        let mut word_pairs: HashMap<(char, char), usize> = HashMap::new();
+        let mut double_pair = false;
+        for (i, pair) in line.chars().zip(line.chars().skip(1)).enumerate() {
+            match word_pairs.entry(pair) {
+                Entry::Vacant(entry) => { entry.insert(i); },
+                Entry::Occupied(entry) => {
+                    double_pair = true;
+                    break;
+                }
+            }
+        }
+        if !double_pair {
+            continue;
+        }
+        
+        let mut triples = false;
+        for (c1, c2) in line.chars().zip(line.chars().skip(2)) {
+            if c1 == c2 {
+                triples = true;
+                break;
+            }
+        }
+        if !triples {
+            break;
+        }
+        
+        nice_strings += 1;
     }
     
     println!("Nice strings: {}", nice_strings);
