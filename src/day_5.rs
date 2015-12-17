@@ -54,7 +54,7 @@ pub fn puzzle_2() {
         for (i, pair) in line.chars().zip(line.chars().skip(1)).enumerate() {
             match word_pairs.entry(pair) {
                 Entry::Vacant(entry) => { entry.insert(i); },
-                Entry::Occupied(entry) => {
+                Entry::Occupied(entry) => if *entry.get() < i - 1 {
                     double_pair = true;
                     break;
                 }
@@ -72,7 +72,7 @@ pub fn puzzle_2() {
             }
         }
         if !triples {
-            break;
+            continue;
         }
         
         nice_strings += 1;
