@@ -2,11 +2,13 @@
 
 mod day_1;
 mod day_2;
+mod day_3;
 
 fn main() {
     let puzzles: Vec<Vec<fn()>> = vec![
         vec![day_1::puzzle_1, day_1::puzzle_2],
         vec![day_2::puzzle_1, day_2::puzzle_2],
+        vec![day_3::puzzle_1, day_3::puzzle_2],
     ];
     
     for (i, day) in puzzles.iter().enumerate() {
