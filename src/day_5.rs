@@ -49,34 +49,33 @@ pub fn puzzle_2() {
     for line in reader.lines() {
         let line = line.unwrap();
         
-        let mut word_pairs: HashMap<(char, char), usize> = HashMap::new();
-        let mut double_pair = false;
-        for (i, pair) in line.chars().zip(line.chars().skip(1)).enumerate() {
-            match word_pairs.entry(pair) {
-                Entry::Vacant(entry) => { entry.insert(i); },
-                Entry::Occupied(entry) => if *entry.get() < i - 1 {
-                    double_pair = true;
-                    break;
+        fn repeats(line: &str) -> bool {
+            for (c1, c2) in line.chars().zip(line.chars().skip(2)) {
+                if c1 == c2 {
+                    return true;
                 }
             }
-        }
-        if !double_pair {
-            continue;
+            false
         }
         
-        let mut triples = false;
-        for (c1, c2) in line.chars().zip(line.chars().skip(2)) {
-            if c1 == c2 {
-                triples = true;
-                break;
+        fn double_pair(line: &str) -> bool {
+            let mut word_pairs: HashMap<(char, char), usize> = HashMap::new();
+            for (i, pair) in line.chars().zip(line.chars().skip(1)).enumerate() {
+                match word_pairs.entry(pair) {
+                    Entry::Vacant(entry) => { entry.insert(i); },
+                    Entry::Occupied(entry) => if *entry.get() < i - 1 {
+                        return true;
+                    }
+                }
             }
-        }
-        if !triples {
-            continue;
+            false
         }
         
-        nice_strings += 1;
+        if repeats(&line) && double_pair(&line) {
+            nice_strings += 1;
+        }
     }
     
     println!("Nice strings: {}", nice_strings);
 }
+
