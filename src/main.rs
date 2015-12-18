@@ -8,6 +8,7 @@ mod day_3;
 mod day_4;
 mod day_5;
 mod day_6;
+mod day_7;
 
 fn main() {
     let puzzles: Vec<Vec<fn()>> = vec![
@@ -17,9 +18,10 @@ fn main() {
         vec![day_4::puzzle_1, day_4::puzzle_2],
         vec![day_5::puzzle_1, day_5::puzzle_2],
         vec![day_6::puzzle_1, day_6::puzzle_2],
+        vec![day_7::puzzle_1]//, day_6::puzzle_2],
     ];
     
-    for (i, day) in puzzles.iter().enumerate().skip(5) {
+    for (i, day) in puzzles.iter().enumerate().skip(6) {
         for (j, puzzle) in day.iter().enumerate() {
             println!("Day {} Puzzle {}:", i + 1, j + 1);
             puzzle();
