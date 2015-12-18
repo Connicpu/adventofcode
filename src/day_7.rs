@@ -112,6 +112,7 @@ pub fn puzzle_1() {
     let result = state.evaluate("a");
     println!("a = {}", result);
     
+    println!("b := a, reset");
     state.clear();
     state.set("b".into(), Value::Constant(result));
     

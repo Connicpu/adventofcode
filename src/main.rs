@@ -18,7 +18,7 @@ fn main() {
         vec![day_4::puzzle_1, day_4::puzzle_2],
         vec![day_5::puzzle_1, day_5::puzzle_2],
         vec![day_6::puzzle_1, day_6::puzzle_2],
-        vec![day_7::puzzle_1]//, day_6::puzzle_2],
+        vec![day_7::puzzle_1],
     ];
     
     for (i, day) in puzzles.iter().enumerate().skip(6) {
