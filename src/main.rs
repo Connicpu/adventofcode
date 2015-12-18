@@ -21,7 +21,7 @@ fn main() {
         vec![day_7::puzzle_1],
     ];
     
-    for (i, day) in puzzles.iter().enumerate().skip(6) {
+    for (i, day) in puzzles.iter().enumerate().skip(0) {
         for (j, puzzle) in day.iter().enumerate() {
             println!("Day {} Puzzle {}:", i + 1, j + 1);
             puzzle();
